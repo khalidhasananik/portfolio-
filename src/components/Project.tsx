@@ -39,7 +39,7 @@ function Project() {
             </div>
             <div className="project">
                 <a href="https://github.com/khalidhasananik/AutoDoc_VSCode_Extension" target="_blank" rel="noreferrer"><img src={i4} className="zoom" alt="thumbnail" width="100%"/></a>
-                <a href="https://github.com/khalidhasananik/AutoDoc_VSCode_Extension" target="_blank" rel="noreferrer"><h2>AutoDoc: Vs Code Extension</h2></a>
+                <a href="https://github.com/khalidhasananik/AutoDoc_VSCode_Extension" target="_blank" rel="noreferrer"><h2>AutoDoc: VS Code Extension</h2></a>
                 <p>AutoDoc is an AI-powered chatbot extension for Visual Studio Code designed to enhance your coding experience with AI-based assistance.</p>
             </div>
             <div className="project">
