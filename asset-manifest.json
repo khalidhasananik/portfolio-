@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "//khalidhasananik.github.io/portfolio-/static/css/main.5bd78b2f.css",
+    "main.js": "//khalidhasananik.github.io/portfolio-/static/js/main.0740d7af.js",
+    "static/js/453.b05d8aa5.chunk.js": "//khalidhasananik.github.io/portfolio-/static/js/453.b05d8aa5.chunk.js",
+    "static/media/bg-light.png": "//khalidhasananik.github.io/portfolio-/static/media/bg-light.bac0efb485244a522981.png",
+    "static/media/bg-dark.png": "//khalidhasananik.github.io/portfolio-/static/media/bg-dark.f420c6b8458af72de935.png",
+    "static/media/3.png": "//khalidhasananik.github.io/portfolio-/static/media/3.6a8afc59d129336c105e.png",
+    "static/media/6.png": "//khalidhasananik.github.io/portfolio-/static/media/6.90add06d68c07089d073.png",
+    "static/media/5.png": "//khalidhasananik.github.io/portfolio-/static/media/5.2eed25a79b6a5750dae3.png",
+    "static/media/2.png": "//khalidhasananik.github.io/portfolio-/static/media/2.b2ebe95eaf01e08e6a31.png",
+    "static/media/1.png": "//khalidhasananik.github.io/portfolio-/static/media/1.15127e428694f63586ae.png",
+    "static/media/4.png": "//khalidhasananik.github.io/portfolio-/static/media/4.8b97bd7af0844cd8afb3.png",
+    "index.html": "//khalidhasananik.github.io/portfolio-/index.html",
+    "main.5bd78b2f.css.map": "//khalidhasananik.github.io/portfolio-/static/css/main.5bd78b2f.css.map",
+    "main.0740d7af.js.map": "//khalidhasananik.github.io/portfolio-/static/js/main.0740d7af.js.map",
+    "453.b05d8aa5.chunk.js.map": "//khalidhasananik.github.io/portfolio-/static/js/453.b05d8aa5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5bd78b2f.css",
+    "static/js/main.0740d7af.js"
+  ]
+}
