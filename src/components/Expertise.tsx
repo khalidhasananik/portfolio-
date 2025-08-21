@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faReact, faDocker } from '@fortawesome/free-brands-svg-icons';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 import { faRobot } from '@fortawesome/free-solid-svg-icons';
+import { faCogs } from '@fortawesome/free-solid-svg-icons';
+
 import Chip from '@mui/material/Chip';
 import '../assets/styles/Expertise.scss';
+
 
 const labelsFirst = [
     "HTML",
@@ -44,6 +47,25 @@ function Expertise() {
         <div className="skills-container">
             <h1>Expertise</h1>
             <div className="skills-grid">
+
+
+
+                <div className="skill">
+                    <FontAwesomeIcon icon={faCogs} size="3x" />
+                    <h3>Automation Engineering</h3>
+                    <p>
+                        I design and implement automation workflows using tools like n8n, integrating APIs and orchestrating processes to improve efficiency. I am proficient in deploying and managing automation solutions with Docker.
+                    </p>
+                    <div className="flex-chips">
+                        <span className="chip-title">Tech stack:</span>
+                        <Chip className='chip' label="n8n" />
+                        <Chip className='chip' label="API Integration" />
+                        <Chip className='chip' label="Docker" />
+                        <Chip className='chip' label="JavaScript" />
+                        <Chip className='chip' label="REST" />
+                    </div>
+                </div>
+
                 <div className="skill">
                     <FontAwesomeIcon icon={faReact} size="3x"/>
                     <h3>Full Stack Web Development</h3>

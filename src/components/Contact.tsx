@@ -359,19 +359,19 @@ function Contact() {
   };
 
   return (
-    <div className="contact-container">
+    <div id="contact" className="contact-container">
       <h1>Contact Me</h1>
       <form ref={form} onSubmit={sendEmail} className="contact-form">
-        <label htmlFor="name">Name</label>
-        <input type="text" name="name" id="name" required />
+      <label htmlFor="name">Name</label>
+      <input type="text" name="name" id="name" required />
 
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" id="email" required />
+      <label htmlFor="email">Email</label>
+      <input type="email" name="email" id="email" required />
 
-        <label htmlFor="message">Message</label>
-        <textarea name="message" id="message" rows={6} required />
+      <label htmlFor="message">Message</label>
+      <textarea name="message" id="message" rows={6} required />
 
-        <button type="submit">Send</button>
+      <button type="submit">Send</button>
       </form>
     </div>
   );
