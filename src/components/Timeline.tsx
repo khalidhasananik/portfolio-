@@ -21,10 +21,10 @@ function Timeline() {
               iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
               icon={<FontAwesomeIcon icon={faBriefcase} />}
             >
-              <h3 className="vertical-timeline-element-title">ML & AI Ops Engineer</h3>
+              <h3 className="vertical-timeline-element-title">AI Ops & Automation Engineer</h3>
               <h4 className="vertical-timeline-element-subtitle">AWTOMATIG</h4>
               <p>
-                Machine Learning Operations, AI Infrastructure, Model Deployment, Automation
+                AI Workflow Automation, Project Management, Research and Development
               </p>
             </VerticalTimelineElement>
 
