@@ -54,7 +54,7 @@ function Expertise() {
                     <FontAwesomeIcon icon={faCogs} size="3x" />
                     <h3>Automation Engineering</h3>
                     <p>
-                        I design and implement automation workflows using tools like n8n, integrating APIs and orchestrating processes to improve efficiency. I am proficient in deploying and managing automation solutions with Docker.
+                        As an AI Ops & Automation Engineer, I specialize in solving complex integration challenges with clean, maintainable solutions. I design, build, and deploy end-to-end automation pipelines.
                     </p>
                     <div className="flex-chips">
                         <span className="chip-title">Tech stack:</span>
