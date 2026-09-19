@@ -1,83 +1,77 @@
-# Portfolio Revamp — Task List
+# Portfolio Rebuild — Task List
 
 Branch: `revamp/modernize-2026`. `main` stays untouched and live on GitHub Pages until this work is ready to cut over.
 
-## Context
+**2026-09-19 pivot:** originally planned to fix the existing Create React App site in place (see git history of this file for that plan). Superseded — the user found a reactbits.dev/21st.dev component for almost every section, so we're **rebuilding from scratch** in a new Next.js project (`web/`) instead, porting real content from the old site section by section. See [MEMORY.md](MEMORY.md) for the decision log and the live section-by-section build tracker — that tracker, not this file, is what a new session should check first for "what's done."
 
-Original template was personalized early in the "pre-agent" AI era using ChatGPT web + limited coding knowledge. Expect rough edges: hardcoded credentials, dead commented-out code, unpersonalized boilerplate, ad-hoc CSS. Goal of this branch is to fix anomalies, modernize the stack, and get proper infra (hosting, SEO, analytics) in place.
+## Decisions locked in
 
-## Decisions already made
+- **Hosting:** Vercel (unchanged from original plan).
+- **Framework:** Next.js (App Router) — changed from the original Vite plan once the rebuild-from-scratch pivot happened.
+- **Styling:** Tailwind CSS.
+- **Icons:** `lucide-react`.
+- **Component sources:** reactbits.dev and 21st.dev, pasted in by the user one section at a time.
 
-- **Hosting:** migrating from GitHub Pages to **Vercel**.
-- **Build tooling:** migrating from Create React App (`react-scripts`, deprecated/unmaintained) to **Vite**. This is also expected to fix the "only runs via `npm start`, can't use a real dev server" complaint — CRA's webpack dev server is slow to start and slow on HMR; Vite's is near-instant.
+## Phase 1 — Scaffold (done 2026-09-19)
 
-## Known anomalies found so far (pre-work audit)
+- [x] Create `web/` — Next.js 16, TypeScript, Tailwind CSS, App Router, `src/` dir, `@/*` import alias.
+- [x] Install `lucide-react`.
+- [x] Install `clsx` + `tailwind-merge`, add `cn()` helper at `web/src/lib/utils.ts` (near-universal dependency for reactbits/21st.dev components).
+- [ ] Commit the `web/` scaffold to git.
 
-- [ ] `build/` output directory is committed to git (should never be tracked) — remove from repo, confirm `.gitignore` covers it.
-- [ ] `src/components/Contact.tsx` has live EmailJS credentials hardcoded in the source (`service_j9kg0m6`, `template_1u0yhej`, public key `RUEM691sObjwldyCZ`) — move to env vars, and treat the exposed keys as compromised (rotate in EmailJS dashboard) since they've been in a public repo.
-- [ ] `Contact.tsx` has ~280 lines of dead, commented-out prior attempts — delete.
-- [ ] `public/manifest.json` still has placeholder values (`"short_name": "React App"`, `"name": "Create React App Sample"`) — never personalized.
-- [ ] `package.json` `homepage` field is malformed: `"https://https://khalidhasananik.github.io/portfolio-/"` (duplicated protocol) — remove/replace entirely once off GitHub Pages.
-- [ ] `public/index.html` has no Open Graph / Twitter Card tags, no canonical URL, minimal meta description.
-- [ ] `public/robots.txt` is the default CRA stub (no sitemap reference).
-- [ ] No `sitemap.xml` exists.
-- [ ] SCSS/CSS is a mix of `.scss` (in `src/assets/styles/`) and a stray `.css` file (`src/components/Contact.css`) — inconsistent styling approach to reconcile.
-- [ ] `.github/workflows/static.yml` deploys the entire repo (including `build/`) straight to GitHub Pages — to be retired once Vercel is live.
+## Phase 2 — Build sections (in progress)
 
-## Task phases
+Work happens one section at a time: user pastes a component + names a target section, it gets adapted into `web/`, real content gets ported in from the old site, and the tracker in MEMORY.md gets updated. Don't duplicate that tracker here — check MEMORY.md for current status per section (Navigation, Hero, Expertise, Timeline, Projects, Contact, Footer, global layout/theme).
 
-### 1. Repo & tooling cleanup
-- [ ] Remove `build/` from version control; verify `.gitignore` excludes build output.
-- [ ] Migrate CRA → Vite (new entry point, `vite.config.ts`, env var syntax `process.env.*` → `import.meta.env.*`, index.html moved to project root per Vite convention, update TS config).
-- [ ] Audit and update dependencies (React, MUI, FontAwesome, sass, TypeScript, etc.) to current stable versions; drop unused packages (e.g. `gh-pages` once off GitHub Pages).
-- [ ] Confirm `npm run dev` (or equivalent) launches a real local dev server with HMR.
-- [ ] Delete dead/commented-out code across components, starting with `Contact.tsx`.
-- [ ] Reconcile styling approach (SCSS vs stray CSS file) into one consistent system.
+- [ ] All sections built and wired into `web/src/app/page.tsx`.
+- [ ] Contact form working end-to-end with its own env-var-based EmailJS (or alternative) setup — not the old hardcoded keys.
+- [ ] Dark/light mode decided and implemented fresh (old site used a manual class toggle; consider `next-themes` + Tailwind `dark:` instead).
+- [ ] Responsive/mobile pass once sections are in place.
 
-### 2. Fix hardcoded credentials & contact form
-- [ ] Move EmailJS service ID / template ID / public key into environment variables (`.env.local`, not committed; documented in `.env.example`).
-- [ ] Rotate the EmailJS keys since the old ones were exposed in the public repo history.
-- [ ] Re-test the contact form end-to-end after the change.
+## Phase 3 — Retire the old site
 
-### 3. Hosting migration (GitHub Pages → Vercel)
-- [ ] Create Vercel project, connect repo, configure build settings for Vite output.
-- [ ] Set environment variables in Vercel dashboard (EmailJS keys, analytics IDs).
-- [ ] Set up custom domain (if applicable) + redirects (`public/_redirects` is a Netlify-style file — not used by Vercel; replace with `vercel.json` rewrites if needed for SPA routing).
-- [ ] Verify preview deployments work on PRs.
-- [ ] Once verified live and stable, retire `.github/workflows/static.yml` and the `gh-pages` branch/deploy script.
+- [ ] Once `web/` fully replaces the old site's functionality, decide cutover approach (promote `web/` contents to repo root vs. keep as subfolder — revisit once Vercel project setup is underway, since Vercel can build from a subfolder directly).
+- [ ] Rotate the exposed EmailJS credentials in the EmailJS dashboard (needed regardless of the rebuild — they've been public).
+- [ ] Delete/archive the old `src/`, `public/`, `build/`, and root `package.json` once no longer needed as a content reference.
+- [ ] Retire `.github/workflows/static.yml` and the `gh-pages` deploy path.
 
-### 4. SEO
-- [ ] Write proper `<title>`, meta description, and canonical tag per page/section.
-- [ ] Add Open Graph tags (`og:title`, `og:description`, `og:image`, `og:url`, `og:type`) and Twitter Card tags.
-- [ ] Design/generate a proper OG share image (currently no dedicated social preview image exists).
-- [ ] Generate `sitemap.xml` and reference it from `robots.txt`.
-- [ ] Update `robots.txt` for production (currently the unmodified CRA default).
-- [ ] Update `manifest.json` with real name/short_name/theme colors (currently CRA placeholder values).
-- [ ] Basic structured data (JSON-LD, `Person` or `ProfilePage` schema) for richer search results.
+## Phase 4 — Hosting migration
 
-### 5. Analytics / tracking
-- [ ] Decide on tracking stack — options to evaluate:
-  - **GTM + GA4** (user's initial thought): most flexible, industry standard, but heavier and cookie/consent implications.
-  - **Lightweight alternatives**: Plausible, Umami (self-hostable), Fathom, Simple Analytics — smaller script footprint, privacy-friendly, often no cookie-consent banner needed.
-  - Recommendation to revisit once other phases are done: for a personal portfolio, a lightweight privacy-first option (e.g. Umami self-hosted or Plausible) is usually enough unless there's a specific reason to want GA4's ecosystem (e.g. Google Ads retargeting).
-- [ ] Implement chosen tracking with a cookie-consent banner if required by the chosen tool.
-- [ ] Add basic conversion/event tracking on the contact form submission.
+- [ ] Create Vercel project, connect repo, configure build settings (pointing at `web/` if it stays a subfolder).
+- [ ] Set environment variables in Vercel (EmailJS/contact-form keys, analytics IDs).
+- [ ] Verify preview deployments on PRs.
+- [ ] Custom domain setup if applicable.
 
-### 6. Modernize components / UI
-- [ ] Review each section (Main, Expertise, Timeline, Project, Contact, Footer, Navigation) for outdated patterns and visual polish opportunities.
-- [ ] Replace/update any deprecated MUI or FontAwesome usage after dependency bumps.
-- [ ] Accessibility pass (semantic HTML, alt text, color contrast, keyboard nav).
-- [ ] Responsive/mobile QA pass.
+## Phase 5 — SEO
 
-### 7. Performance & code quality
-- [ ] Run Lighthouse audit (performance, accessibility, best practices, SEO) as a baseline, then again after changes.
-- [ ] Image optimization (the `src/assets/images/*.png` mockups and profile photo are unoptimized PNGs — consider WebP/AVIF + responsive sizes).
-- [ ] Code-split/lazy-load where useful (Vite makes this straightforward).
+- [ ] Metadata via Next.js Metadata API (title, description, canonical) per page/section.
+- [ ] Open Graph + Twitter Card tags via the Metadata API.
+- [ ] OG share image — generate via Next's `opengraph-image` file convention or a static designed image (no dedicated one exists yet).
+- [ ] `sitemap.ts` and `robots.ts` via Next's file conventions (replaces hand-written `sitemap.xml`/`robots.txt`).
+- [ ] `manifest.json`/`manifest.ts` with real name/short_name/theme colors (old one still has CRA placeholder values, but that file is going away with the old site anyway).
+- [ ] Structured data (JSON-LD, `Person`/`ProfilePage` schema).
+
+## Phase 6 — Analytics / tracking
+
+- [ ] Decide on tracking stack — still undecided, options to evaluate:
+  - **GTM + GA4** (user's initial thought): most flexible, industry standard, heavier + cookie/consent implications.
+  - **Lightweight alternatives**: Plausible, Umami (self-hostable), Fathom, Simple Analytics — smaller footprint, privacy-friendly, often no consent banner needed.
+  - Leaning recommendation: for a personal portfolio, a lightweight privacy-first option is usually enough unless there's a specific reason to want GA4's ecosystem.
+- [ ] Implement chosen tracking (+ consent banner if required).
+- [ ] Event tracking on contact form submission.
+
+## Phase 7 — Performance & code quality
+
+- [ ] Lighthouse audit baseline once sections are built, then again after polish.
+- [ ] Image optimization — old PNG mockups/profile photo should move to Next's `<Image>` with modern formats.
 - [ ] Type-check and lint cleanup.
+- [ ] Re-point `.codegraph/` at `web/` once there's enough real code to index.
 
-### 8. Open items / TBD
+## Open items / TBD
+
 - [ ] Anything else that comes up as we go — append here rather than starting a separate doc.
 
 ## Notes
+
 - Work incrementally, commit per logical chunk, keep `main` deployable/untouched until we're ready to cut over to Vercel.
-- Ask before any destructive/irreversible step (key rotation, deleting the GitHub Pages workflow, DNS changes).
+- Ask before any destructive/irreversible step (key rotation, deleting the old site, deleting the GitHub Pages workflow, DNS changes).
