@@ -1,0 +1,16 @@
+# Khalid Hasan Anik
+
+> Portfolio of Khalid Hasan Anik, a software engineer based in Dhaka, Bangladesh, working across automation engineering, full-stack web development, and machine learning.
+
+Khalid Hasan Anik is a software engineer and project coordinator. Areas of focus: workflow automation, AI agents, DevOps, and full-stack web development.
+
+## Pages
+
+- [Homepage](https://khalidhasananik.com): Bio, areas of expertise, project history, and contact form.
+- [Case Studies](https://khalidhasananik.com/cases): In-depth project write-ups (in progress).
+
+## Contact
+
+- Email: khalidhasananik@outlook.com
+- GitHub: https://github.com/khalidhasananik
+- LinkedIn: https://www.linkedin.com/in/khalidhasananik/
