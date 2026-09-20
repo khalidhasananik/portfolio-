@@ -12,7 +12,7 @@ const SOCIAL_LINKS = [
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-screen">
+    <section id="home" className="relative w-full h-screen">
       <AeroShards
         backgroundColor="#120F17"
         shardColor="#896ABD"
@@ -28,11 +28,11 @@ export default function Hero() {
         speed={1}
         spin={1}
         interaction="repel"
-        density={1.5}
+        density={1.25}
         shardSize={1.1}
         stretch={1}
         turbulence={1}
-        glow={1}
+        glow={1.25}
         edgeSoftness={2}
         bloom={0.5}
         grain={0.05}

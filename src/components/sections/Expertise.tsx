@@ -35,7 +35,7 @@ const SLIDES = [
 
 export default function Expertise() {
   return (
-    <HoverSlider className="min-h-svh place-content-center bg-white p-6 text-[#3d3929] md:px-12">
+    <HoverSlider id="expertise" className="min-h-svh place-content-center bg-white p-6 text-[#3d3929] md:px-12">
       <div className="flex flex-wrap items-center justify-evenly gap-6 md:gap-12">
         <div className="flex flex-col space-y-2 md:space-y-4">
           {SLIDES.map((slide, index) => (

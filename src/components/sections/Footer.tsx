@@ -2,12 +2,12 @@ import { GithubIcon } from "@/components/ui/github";
 import { LinkedinIcon } from "@/components/ui/linkedin";
 
 const NAV_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "Expertise", href: "#expertise" },
-  { label: "History", href: "#history" },
-  { label: "Projects", href: "#projects" },
+  { label: "Home", href: "/#home" },
+  { label: "Expertise", href: "/#expertise" },
+  { label: "History", href: "/#history" },
+  { label: "Projects", href: "/#projects" },
   { label: "Cases", href: "/cases" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const SOCIAL_LINKS = [

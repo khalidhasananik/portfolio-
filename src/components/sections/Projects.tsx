@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const PROJECTS = [
   {
     title: "Real-Time Soil Analysis and Predictive Analytics",
@@ -52,9 +54,12 @@ export default function Projects() {
         {PROJECTS.map((project) => (
           <div key={project.title} className="text-left">
             <a href={project.link} target="_blank" rel="noreferrer">
-              <img
+              <Image
                 src={project.imageUrl}
-                className="mx-auto w-full rounded-[5px] transition-transform duration-200 hover:scale-105"
+                width={2125}
+                height={1400}
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="mx-auto h-auto w-full rounded-[5px] transition-transform duration-200 hover:scale-105"
                 alt="thumbnail"
               />
             </a>

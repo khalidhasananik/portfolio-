@@ -51,7 +51,9 @@ export const HoverSlider = React.forwardRef<
   )
   return (
     <HoverSliderContext.Provider value={{ activeSlide, changeSlide }}>
-      <div className={className}>{children}</div>
+      <div ref={ref as React.Ref<HTMLDivElement>} className={className} {...props}>
+        {children}
+      </div>
     </HoverSliderContext.Provider>
   )
 })

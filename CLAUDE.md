@@ -52,3 +52,13 @@ If a request is ambiguous (which section, which of several pasted components, wh
 - Delete replaced/dead code outright (don't comment it out "for reference" — git history already has it).
 - Treat any credential (the old site's EmailJS service ID/template ID/public key were hardcoded and already known-exposed — see MEMORY.md) as sensitive: never hardcode in this site, use env vars (`.env.local`, gitignored), and flag any newly-found hardcoded secret to the user immediately rather than silently fixing it.
 - No destructive or hard-to-reverse actions (deleting branches/workflows, DNS/domain changes, key rotation, force-pushing) without explicit confirmation.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Epilogue } from "next/font/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import "./globals.css";
+
+const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
 
 const epilogue = Epilogue({
   variable: "--font-epilogue",
@@ -39,7 +42,18 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${epilogue.variable} h-full antialiased`}>
+      {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}
       <body className="min-h-full flex flex-col">
+        {gtmId ? (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        ) : null}
         <Navbar />
         {children}
         <Footer />

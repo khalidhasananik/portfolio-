@@ -2,6 +2,43 @@
 
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import { Blobatar } from '@blobatar/react';
+import { useGaze } from '@blobatar/react/gaze';
+import {
+  idle,
+  happy,
+  surprised,
+  wink,
+  smug,
+  love,
+  thinking,
+  sleepy,
+  shy,
+  unsure,
+  sad,
+  mad,
+  scared,
+  sick
+} from 'blobatar/expression';
+import 'blobatar/motion.css';
+import 'blobatar/gaze.css';
+
+const BLOBATAR_EXPRESSIONS = [
+  idle,
+  happy,
+  surprised,
+  wink,
+  smug,
+  love,
+  thinking,
+  sleepy,
+  shy,
+  unsure,
+  sad,
+  mad,
+  scared,
+  sick
+];
 
 export interface StaggeredMenuItem {
   label: string;
@@ -20,7 +57,6 @@ export interface StaggeredMenuProps {
   displaySocials?: boolean;
   displayItemNumbering?: boolean;
   className?: string;
-  logoUrl?: string;
   menuButtonColor?: string;
   openMenuButtonColor?: string;
   accentColor?: string;
@@ -39,7 +75,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   displaySocials = true,
   displayItemNumbering = true,
   className,
-  logoUrl = '/src/assets/logos/reactbits-gh-white.svg',
   menuButtonColor = '#fff',
   openMenuButtonColor = '#fff',
   changeMenuColorOnOpen = true,
@@ -51,6 +86,20 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 }: StaggeredMenuProps) => {
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
+
+  const { ref: blobatarGazeRef, remeasure: remeasureBlobatarGaze } = useGaze({ travel: 4, lookAt: 'pointer' });
+  const [blobatarExpressionIndex, setBlobatarExpressionIndex] = useState(0);
+  const blobatarRevertTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cycleBlobatarExpression = useCallback(() => {
+    setBlobatarExpressionIndex(i => (i + 1) % BLOBATAR_EXPRESSIONS.length);
+    if (blobatarRevertTimeoutRef.current) clearTimeout(blobatarRevertTimeoutRef.current);
+    blobatarRevertTimeoutRef.current = setTimeout(() => setBlobatarExpressionIndex(0), 2000);
+  }, []);
+  React.useEffect(() => {
+    return () => {
+      if (blobatarRevertTimeoutRef.current) clearTimeout(blobatarRevertTimeoutRef.current);
+    };
+  }, []);
 
   const panelRef = useRef<HTMLDivElement | null>(null);
   const preLayersRef = useRef<HTMLDivElement | null>(null);
@@ -207,12 +256,16 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     if (tl) {
       tl.eventCallback('onComplete', () => {
         busyRef.current = false;
+        // Panel slides in via a GSAP transform; the gaze driver's cached box
+        // stays pinned off-screen until re-measured, since neither
+        // ResizeObserver nor scroll/resize fires for a transform.
+        remeasureBlobatarGaze();
       });
       tl.play(0);
     } else {
       busyRef.current = false;
     }
-  }, [buildOpenTimeline]);
+  }, [buildOpenTimeline, remeasureBlobatarGaze]);
 
   const playClose = useCallback(() => {
     openTlRef.current?.kill();
@@ -419,23 +472,12 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         </div>
 
         <header
-          className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between p-[2em] bg-transparent pointer-events-none z-20"
+          className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-end p-[2em] bg-transparent pointer-events-none z-20"
           aria-label="Main navigation header"
         >
-          <div className="sm-logo flex items-center select-none pointer-events-auto" aria-label="Logo">
-            <img
-              src={logoUrl || '/src/assets/logos/reactbits-gh-white.svg'}
-              alt="Logo"
-              className="sm-logo-img block h-8 w-auto object-contain"
-              draggable={false}
-              width={110}
-              height={24}
-            />
-          </div>
-
           <button
             ref={toggleBtnRef}
-            className={`sm-toggle relative inline-flex items-center gap-[0.3rem] bg-transparent border-0 cursor-pointer font-medium leading-none overflow-visible pointer-events-auto ${
+            className={`sm-toggle relative inline-flex items-center gap-[0.3rem] bg-transparent border-0 cursor-pointer font-medium leading-none overflow-visible pointer-events-auto text-base md:text-lg ${
               open ? 'text-black' : 'text-[#e9e9ef]'
             }`}
             aria-label={open ? 'Close menu' : 'Open menu'}
@@ -460,7 +502,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
             <span
               ref={iconRef}
-              className="sm-icon relative w-[14px] h-[14px] shrink-0 inline-flex items-center justify-center [will-change:transform]"
+              className="sm-icon relative w-[14px] h-[14px] md:w-[16px] md:h-[16px] shrink-0 inline-flex items-center justify-center [will-change:transform]"
               aria-hidden="true"
             >
               <span
@@ -496,6 +538,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                       href={it.link}
                       aria-label={it.ariaLabel}
                       data-index={idx + 1}
+                      onClick={closeMenu}
                     >
                       <span className="sm-panel-itemLabel inline-block [transform-origin:50%_100%] will-change-transform">
                         {it.label}
@@ -513,6 +556,29 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 </li>
               )}
             </ul>
+
+            <div
+              className="sm-blobatar flex items-center justify-center py-8 cursor-pointer"
+              role="button"
+              tabIndex={0}
+              aria-label="Cycle blobatar expression"
+              onClick={cycleBlobatarExpression}
+              onKeyDown={e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  cycleBlobatarExpression();
+                }
+              }}
+            >
+              <Blobatar
+                ref={blobatarGazeRef}
+                name="khalidhasananik"
+                hue={270}
+                animate="always"
+                size={140}
+                expression={BLOBATAR_EXPRESSIONS[blobatarExpressionIndex]}
+              />
+            </div>
 
             {displaySocials && socialItems && socialItems.length > 0 && (
               <div className="sm-socials mt-auto mb-12 pt-8 flex flex-col gap-3" aria-label="Social links">
@@ -542,10 +608,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
       <style>{`
 .sm-scope .staggered-menu-wrapper { position: relative; width: 100%; height: 100%; z-index: 40; pointer-events: none; }
-.sm-scope .staggered-menu-header { position: absolute; top: 0; left: 0; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 2em; background: transparent; pointer-events: none; z-index: 20; }
+.sm-scope .staggered-menu-header { position: absolute; top: 0; left: 0; width: 100%; display: flex; align-items: center; justify-content: flex-end; padding: 2em; background: transparent; pointer-events: none; z-index: 20; }
 .sm-scope .staggered-menu-header > * { pointer-events: auto; }
-.sm-scope .sm-logo { display: flex; align-items: center; user-select: none; }
-.sm-scope .sm-logo-img { display: block; height: 32px; width: auto; object-fit: contain; }
 .sm-scope .sm-toggle { position: relative; display: inline-flex; align-items: center; gap: 0.3rem; background: transparent; border: none; cursor: pointer; color: #e9e9ef; font-weight: 500; line-height: 1; overflow: visible; }
 .sm-scope .sm-toggle:focus-visible { outline: 2px solid #ffffffaa; outline-offset: 4px; border-radius: 4px; }
 .sm-scope .sm-line:last-of-type { margin-top: 6px; }
@@ -553,6 +617,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 .sm-scope .sm-toggle-textInner { display: flex; flex-direction: column; line-height: 1; }
 .sm-scope .sm-toggle-line { display: block; height: 1em; line-height: 1; }
 .sm-scope .sm-icon { position: relative; width: 14px; height: 14px; flex: 0 0 14px; display: inline-flex; align-items: center; justify-content: center; will-change: transform; }
+@media (min-width: 768px) { .sm-scope .sm-icon { width: 16px; height: 16px; flex: 0 0 16px; } }
 .sm-scope .sm-panel-itemWrap { position: relative; overflow: hidden; line-height: 1; }
 .sm-scope .sm-icon-line { position: absolute; left: 50%; top: 50%; width: 100%; height: 2px; background: currentColor; border-radius: 2px; transform: translate(-50%, -50%); will-change: transform; }
 .sm-scope .sm-line { display: none !important; }
@@ -580,8 +645,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 .sm-scope .sm-panel-item:hover { color: var(--sm-accent, #ff0000); }
 .sm-scope .sm-panel-list[data-numbering] { counter-reset: smItem; }
 .sm-scope .sm-panel-list[data-numbering] .sm-panel-item::after { counter-increment: smItem; content: counter(smItem, decimal-leading-zero); position: absolute; top: 0.1em; right: 3.2em; font-size: 18px; font-weight: 400; color: var(--sm-accent, #ff0000); letter-spacing: 0; pointer-events: none; user-select: none; opacity: var(--sm-num-opacity, 0); }
-@media (max-width: 1024px) { .sm-scope .staggered-menu-panel { width: 100%; left: 0; right: 0; } .sm-scope .staggered-menu-wrapper[data-open] .sm-logo-img { filter: invert(100%); } }
-@media (max-width: 640px) { .sm-scope .staggered-menu-panel { width: 100%; left: 0; right: 0; } .sm-scope .staggered-menu-wrapper[data-open] .sm-logo-img { filter: invert(100%); } }
+@media (max-width: 1024px) { .sm-scope .staggered-menu-panel { width: 100%; left: 0; right: 0; } }
+@media (max-width: 640px) { .sm-scope .staggered-menu-panel { width: 100%; left: 0; right: 0; } }
       `}</style>
     </div>
   );
