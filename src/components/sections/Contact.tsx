@@ -16,7 +16,7 @@ const CONTACT_INFO = [
   {
     icon: AtSignIcon,
     label: "Email",
-    href: "mailto:khalidhasananik@outlook.com",
+    href: "mailto:contact@khalidhasananik.com",
   },
   {
     icon: GithubIcon,
