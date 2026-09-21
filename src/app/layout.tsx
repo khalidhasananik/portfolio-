@@ -13,11 +13,11 @@ const epilogue = Epilogue({
 });
 
 const siteUrl = "https://khalidhasananik.com";
-const title = "Khalid Hasan Anik — Software Engineer in Dhaka, Bangladesh";
+const title = "Khalid Hasan Anik — Technical Project Coordinator in Dhaka, Bangladesh";
 const description =
-  "Khalid Hasan Anik is a software engineer in Dhaka, Bangladesh, working in automation engineering, full-stack web development, and machine learning.";
+  "Khalid Hasan Anik is a Technical Project Coordinator at AWTOMATIG in Dhaka, Bangladesh, working hands-on as a full-stack developer, DevOps engineer, and AI automation builder.";
 const ogDescription =
-  "Software engineer in Dhaka, Bangladesh — automation engineering, full-stack development, and machine learning.";
+  "Technical Project Coordinator at AWTOMATIG — full-stack development, AI automation, and DevOps in Dhaka, Bangladesh.";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -29,7 +29,7 @@ const jsonLd = {
       alternateName: "Khalid Hasan",
       url: siteUrl,
       image: `${siteUrl}/opengraph-image.jpg`,
-      jobTitle: "Project Coordinator",
+      jobTitle: "Technical Project Coordinator",
       description,
       email: "mailto:khalidhasananik@outlook.com",
       telephone: "+8801640577943",
@@ -41,6 +41,7 @@ const jsonLd = {
       worksFor: {
         "@type": "Organization",
         name: "AWTOMATIG",
+        url: "https://www.awtomatig.com",
       },
       alumniOf: {
         "@type": "CollegeOrUniversity",
@@ -60,14 +61,13 @@ const jsonLd = {
         "https://www.pinterest.com/khalidhasananik/",
       ],
       knowsAbout: [
-        "Software Engineering",
-        "Full-Stack Web Development",
-        "Automation Engineering",
-        "AI Agents",
-        "Workflow Automation",
-        "DevOps",
-        "Project Coordination",
-        "Machine Learning",
+        "Technical Project Coordination",
+        "AI Agents & RAG Systems",
+        "Workflow Automation (n8n)",
+        "Full-Stack Web Development (Next.js, React)",
+        "DevOps (Docker, CI/CD, Linux VPS Administration)",
+        "Analytics & Tracking (GA4, Google Tag Manager, Google Ads)",
+        "Team Mentoring & Client Delivery",
       ],
     },
     {

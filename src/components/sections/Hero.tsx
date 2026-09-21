@@ -3,7 +3,7 @@ import TextType from "@/components/TextType";
 import { GithubIcon } from "@/components/ui/github";
 import { LinkedinIcon } from "@/components/ui/linkedin";
 
-const ROLES = ["Software Engineer", "Project Coordinator", "Tech Enthusiast"];
+const ROLES = ["Software Engineer", "Technical Project Coordinator", "AI Automation Builder"];
 
 const SOCIAL_LINKS = [
   { label: "GitHub", href: "https://github.com/khalidhasananik", Icon: GithubIcon },

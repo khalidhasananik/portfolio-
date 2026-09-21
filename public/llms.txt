@@ -1,16 +1,23 @@
 # Khalid Hasan Anik
 
-> Portfolio of Khalid Hasan Anik, a software engineer based in Dhaka, Bangladesh, working across automation engineering, full-stack web development, and machine learning.
+> Khalid Hasan Anik is a Technical Project Coordinator at AWTOMATIG (an AI automation & BPO agency in Dhaka, Bangladesh) who also works hands-on as the company's full-stack developer, DevOps engineer, and AI automation builder.
 
-Khalid Hasan Anik is a software engineer and project coordinator. Areas of focus: workflow automation, AI agents, DevOps, and full-stack web development.
+Khalid coordinates project delivery for a small team while personally building the AI agents, RAG systems, automations, and web infrastructure that AWTOMATIG and its clients run on. Areas of focus: AI agents and RAG systems, workflow automation (n8n), full-stack web development (Next.js, React), DevOps (Docker, CI/CD, Linux VPS administration), and analytics/tracking (GA4, Google Tag Manager, Google Ads).
+
+He holds a BSc in Computer Science and Engineering from North South University (2021–2025).
 
 ## Pages
 
 - [Homepage](https://khalidhasananik.com): Bio, areas of expertise, project history, and contact form.
 - [Case Studies](https://khalidhasananik.com/cases): In-depth project write-ups (in progress).
 
+## Side Projects
+
+- [Price Scout](https://utilbook.store): A price comparison search tool that finds a product across the web and returns the top 5 results sorted by price, with ratings and direct links.
+
 ## Contact
 
 - Email: khalidhasananik@outlook.com
-- GitHub: https://github.com/khalidhasananik
 - LinkedIn: https://www.linkedin.com/in/khalidhasananik/
+- GitHub: https://github.com/khalidhasananik
+- Company: AWTOMATIG — https://www.awtomatig.com

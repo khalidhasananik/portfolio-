@@ -3,7 +3,7 @@ import { BriefcaseBusinessIcon } from "@/components/ui/briefcase-business";
 import { GraduationCapIcon } from "@/components/ui/graduation-cap";
 
 const AWTOMATIG_ROLES = [
-  { title: "Project Coordinator", dates: "Feb 2026 – Present" },
+  { title: "Technical Project Coordinator", dates: "Feb 2026 – Present" },
   { title: "AI Ops & Automation Engineer", dates: "Nov 2025 – Feb 2026" },
   { title: "Intern", dates: "Jul 2025 – Oct 2025" },
 ];
@@ -21,7 +21,7 @@ export default function History() {
           <h1 className="text-[clamp(3rem,10vw,10rem)] leading-[0.9] font-bold tracking-tight uppercase">
             AWTOMATIG
           </h1>
-          <p className="text-sm opacity-60">Dhaka, Bangladesh · On-site · 1 yr 3 mos</p>
+          <p className="text-sm opacity-60">Dhaka, Bangladesh · On-site · 1 yr 2 mos</p>
           <hr className="my-[2vw] border-t border-white/20" />
           <div className="mt-auto flex flex-col gap-[2vw]">
             {AWTOMATIG_ROLES.map((role) => (
@@ -74,7 +74,7 @@ export default function History() {
               <p className="text-[clamp(1.1rem,2vw,1.6rem)] font-semibold">
                 BSc in Computer Science and Engineering
               </p>
-              <p className="text-sm opacity-60">2021 – 2024</p>
+              <p className="text-sm opacity-60">Feb 2021 – Jan 2025</p>
             </div>
           </div>
         </FlowSection>
