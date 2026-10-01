@@ -59,6 +59,7 @@ const jsonLd = {
         "https://www.instagram.com/khalidhasananik__/",
         "https://www.facebook.com/khalidHanik/",
         "https://www.pinterest.com/khalidhasananik/",
+        "https://medium.com/@khalidhasananik",
       ],
       knowsAbout: [
         "Technical Project Coordination",

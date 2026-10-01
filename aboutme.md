@@ -102,6 +102,7 @@ Yes — including Price Scout (a price comparison search tool at utilbook.store)
 ## Contact & Links
 
 - **LinkedIn:** https://linkedin.com/in/khalidhasananik
+- **Medium:** https://medium.com/@khalidhasananik
 - **Company:** AWTOMATIG — https://www.awtomatig.com
 - **Side project:** Price Scout — https://utilbook.store
 
