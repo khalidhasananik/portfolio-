@@ -592,7 +592,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                       <a
                         href={s.link}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="me noopener noreferrer"
                         className="sm-socials-link text-[1.2rem] font-semibold text-[#111] no-underline relative inline-block py-[2px] transition-[color,opacity] duration-300 ease-linear"
                       >
                         {s.label}

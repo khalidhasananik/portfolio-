@@ -52,7 +52,7 @@ export default function Hero() {
                 key={label}
                 href={href}
                 target="_blank"
-                rel="noreferrer"
+                rel="me noreferrer"
                 aria-label={label}
                 className="transition-colors duration-150 ease-in-out hover:text-[#5000ca]"
               >

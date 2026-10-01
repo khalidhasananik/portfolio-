@@ -87,7 +87,7 @@ function ContactInfo({
 			<a
 				href={href}
 				target={href.startsWith('http') ? '_blank' : undefined}
-				rel={href.startsWith('http') ? 'noreferrer' : undefined}
+				rel={href.startsWith('http') ? 'me noreferrer' : undefined}
 				className={cn(
 					'flex items-center gap-3 py-3 transition-colors duration-150 ease-in-out hover:text-[#5000ca]',
 					className,

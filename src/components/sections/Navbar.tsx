@@ -17,7 +17,7 @@ const STAGGERED_ITEMS = NAV_ITEMS.map((item) => ({
 
 const SOCIAL_ITEMS = [
   { label: "GitHub", link: "https://github.com/khalidhasananik" },
-  { label: "LinkedIn", link: "https://linkedin.com/in/khalidhasananik" },
+  { label: "LinkedIn", link: "https://www.linkedin.com/in/khalidhasananik/" },
 ];
 
 export default function Navbar() {
