@@ -31,7 +31,7 @@ const jsonLd = {
       image: `${siteUrl}/opengraph-image.jpg`,
       jobTitle: "Technical Project Coordinator",
       description,
-      email: "mailto:contact@khalidhasananik.com",
+      email: "mailto:khalidhasananik@outlook.com",
       telephone: "+8801640577943",
       address: {
         "@type": "PostalAddress",
