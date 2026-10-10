@@ -78,6 +78,16 @@ const jsonLd = {
       url: siteUrl,
       about: { "@id": `${siteUrl}/#person` },
     },
+    {
+      "@type": "ProfilePage",
+      "@id": `${siteUrl}/#profilepage`,
+      url: siteUrl,
+      name: title,
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      mainEntity: { "@id": `${siteUrl}/#person` },
+      dateCreated: "2026-09-19T00:00:00Z",
+      dateModified: new Date().toISOString(),
+    },
   ],
 };
 
@@ -88,6 +98,7 @@ export const metadata: Metadata = {
     template: "%s — Khalid Hasan",
   },
   description,
+  alternates: { canonical: "/" },
   openGraph: {
     title,
     description: ogDescription,

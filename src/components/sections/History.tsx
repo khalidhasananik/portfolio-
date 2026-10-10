@@ -18,9 +18,9 @@ export default function History() {
         >
           <p className="text-xs font-bold tracking-[0.2em] uppercase">01 — Experience</p>
           <hr className="my-[2vw] border-t border-white/20" />
-          <h1 className="text-[clamp(3rem,10vw,10rem)] leading-[0.9] font-bold tracking-tight uppercase">
+          <h2 className="text-[clamp(3rem,10vw,10rem)] leading-[0.9] font-bold tracking-tight uppercase">
             AWTOMATIG
-          </h1>
+          </h2>
           <p className="text-sm opacity-60">Dhaka, Bangladesh · On-site · 1 yr 2 mos</p>
           <hr className="my-[2vw] border-t border-white/20" />
           <div className="mt-auto flex flex-col gap-[2vw]">

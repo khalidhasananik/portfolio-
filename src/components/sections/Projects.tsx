@@ -47,9 +47,9 @@ const PROJECTS = [
 export default function Projects() {
   return (
     <div className="flex flex-col bg-black px-[5%] py-[5%] text-left text-white" id="projects">
-      <h1 className="mb-12 text-4xl font-bold tracking-tighter uppercase sm:text-5xl md:text-7xl">
+      <h2 className="mb-12 text-4xl font-bold tracking-tighter uppercase sm:text-5xl md:text-7xl">
         Personal Projects
-      </h1>
+      </h2>
       <div className="grid grid-cols-1 gap-[50px] md:grid-cols-2">
         {PROJECTS.map((project) => (
           <div key={project.title} className="text-left">
@@ -64,7 +64,7 @@ export default function Projects() {
               />
             </a>
             <a href={project.link} target="_blank" rel="noreferrer">
-              <h2 className="mt-4 text-xl font-semibold hover:underline">{project.title}</h2>
+              <h3 className="mt-4 text-xl font-semibold hover:underline">{project.title}</h3>
             </a>
             <p className="mt-2 text-sm text-white/60">{project.description}</p>
           </div>

@@ -73,6 +73,10 @@ export default function Hero() {
             showCursor
             cursorCharacter="_"
           />
+          <p className="sr-only">
+            Technical Project Coordinator at AWTOMATIG in Dhaka, Bangladesh — building full-stack
+            web apps, AI automation, and DevOps pipelines.
+          </p>
         </div>
       </div>
     </section>

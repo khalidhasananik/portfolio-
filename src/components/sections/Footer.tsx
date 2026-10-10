@@ -4,7 +4,7 @@ import { LinkedinIcon } from "@/components/ui/linkedin";
 const NAV_LINKS = [
   { label: "Home", href: "/#home" },
   { label: "Expertise", href: "/#expertise" },
-  { label: "History", href: "/#history" },
+  { label: "About", href: "/#history" },
   { label: "Projects", href: "/#projects" },
   { label: "Cases", href: "/cases" },
   { label: "Contact", href: "/#contact" },

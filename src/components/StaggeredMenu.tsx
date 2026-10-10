@@ -86,6 +86,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 }: StaggeredMenuProps) => {
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
+  // Closed position must be in the server-rendered markup, otherwise the panel
+  // flashes on-screen until GSAP takes over after hydration.
+  const offscreenTransform = `translateX(${position === 'left' ? -100 : 100}%)`;
 
   const { ref: blobatarGazeRef, remeasure: remeasureBlobatarGaze } = useGaze({ travel: 4, lookAt: 'pointer' });
   const [blobatarExpressionIndex, setBlobatarExpressionIndex] = useState(0);
@@ -143,7 +146,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       preLayerElsRef.current = preLayers;
 
       const offscreen = position === 'left' ? -100 : 100;
-      gsap.set([panel, ...preLayers], { xPercent: offscreen, opacity: 1 });
+      gsap.set([panel, ...preLayers], { x: 0, xPercent: offscreen, opacity: 1 });
       if (preContainer) {
         gsap.set(preContainer, { xPercent: 0, opacity: 1 });
       }
@@ -465,7 +468,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
               <div
                 key={i}
                 className="sm-prelayer absolute top-0 right-0 h-full w-full translate-x-0"
-                style={{ background: c }}
+                style={{ background: c, transform: offscreenTransform }}
               />
             ));
           })()}
@@ -477,9 +480,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         >
           <button
             ref={toggleBtnRef}
-            className={`sm-toggle relative inline-flex items-center gap-[0.3rem] bg-transparent border-0 cursor-pointer font-medium leading-none overflow-visible pointer-events-auto text-base md:text-lg ${
-              open ? 'text-black' : 'text-[#e9e9ef]'
-            }`}
+            className="sm-toggle relative inline-flex items-center gap-[0.3rem] bg-transparent border-0 cursor-pointer font-medium leading-none overflow-visible pointer-events-auto text-base md:text-lg"
+            style={{ color: menuButtonColor }}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
             aria-controls="staggered-menu-panel"
@@ -512,6 +514,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
               <span
                 ref={plusVRef}
                 className="sm-icon-line sm-icon-line-v absolute left-1/2 top-1/2 w-full h-[2px] bg-current rounded-[2px] -translate-x-1/2 -translate-y-1/2 [will-change:transform]"
+                style={{ transform: 'translate(-50%, -50%) rotate(90deg)' }}
               />
             </span>
           </button>
@@ -521,7 +524,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           id="staggered-menu-panel"
           ref={panelRef}
           className="staggered-menu-panel absolute top-0 right-0 h-full bg-white flex flex-col p-[6em_2em_2em_2em] overflow-y-auto z-10 backdrop-blur-[12px] pointer-events-auto"
-          style={{ WebkitBackdropFilter: 'blur(12px)' }}
+          style={{ WebkitBackdropFilter: 'blur(12px)', transform: offscreenTransform }}
           aria-hidden={!open}
         >
           <div className="sm-panel-inner flex-1 flex flex-col gap-5">
@@ -582,7 +585,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
             {displaySocials && socialItems && socialItems.length > 0 && (
               <div className="sm-socials mt-auto mb-12 pt-8 flex flex-col gap-3" aria-label="Social links">
-                <h3 className="sm-socials-title m-0 text-base font-medium [color:var(--sm-accent,#ff0000)]">Socials</h3>
+                <p className="sm-socials-title m-0 text-base font-medium [color:var(--sm-accent,#ff0000)]">Socials</p>
                 <ul
                   className="sm-socials-list list-none m-0 p-0 flex flex-row items-center gap-4 flex-wrap"
                   role="list"
